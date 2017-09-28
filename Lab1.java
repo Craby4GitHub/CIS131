@@ -1,6 +1,6 @@
 
 /********************************************************************************************************************
-  * GarageCalc.java
+  * Lab1.java
   * Author: Will Crabtree
   * CIS 131: Programming and Problem Solving II
   ********************************************************************************************************************/
@@ -8,20 +8,29 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Lab1 {
-	static Scanner keyboard = new Scanner(System.in);
+	private static boolean departureDay = false;
+	private static Scanner keyboard = new Scanner(System.in);
 	public static double rate;
-	private static int minFee;
-	private static int maxFee;
+	public static int minFee;
+	public static int maxFee;
 	private static int totalPrice;
-	static DecimalFormat df = new DecimalFormat("#.00");
+	private static DecimalFormat df = new DecimalFormat("#.00");
+	private static int departureTime;
 
 	public static void main(String[] args) {
 		String arrivalDay = getDay("Please enter the day of the week (mon, tue, wed, thu, fri, sat, sun):");
 		int arrivalTime = getTime("Please enter the vehicle’s arrival time (HHMM)");
-		int departureTime = getTime("Please enter the vehicle’s departure time (HHMM):");
-		System.out.printf("Day of week: " + arrivalDay + ", Parking duration in minutes: "
-				+ (calcHourDiff(arrivalTime, departureTime)) * 15 + ", rate: $" + df.format(chargeRate(arrivalDay))
-				+ ", amount charged: $" + df.format(totalPrice(arrivalDay, arrivalTime, departureTime)));
+		departureDay = IR4.getYorN("Did the customer leave the same day they arrived?");
+		if (departureDay){
+			do{
+				departureTime = getTime("Please enter the vehicle’s departure time (HHMM):");
+			}while(departureTime < arrivalTime);
+			
+			
+		}else {
+			departureTime = getTime("Please enter the vehicle’s departure time (HHMM):");
+		}
+		System.out.printf("Day of week: " + arrivalDay + ", Parking duration in minutes: " + (calcHourDiff(arrivalTime, departureTime)) * 15 + ", rate: $" + df.format(chargeRate(arrivalDay)) + ", amount charged: $" + df.format(totalPrice(arrivalDay, arrivalTime, departureTime)));
 		keyboard.close();
 	}
 
@@ -63,7 +72,12 @@ public class Lab1 {
 		int depHourToMin = ((depT / 100) * 60);
 		double arrMin = (arrT % 100);
 		double depMin = (depT % 100);
-		return Math.round((((depHourToMin + depMin) - (arrHourToMin + arrMin)) / 15));
+
+		if (departureDay) {
+			return Math.round((((depHourToMin + depMin) - (arrHourToMin + arrMin)) / 15));
+		} else {
+			return Math.round((((1440 - (arrHourToMin + arrMin)) + (depHourToMin + depMin)) / 15));
+		}
 
 	}
 
