@@ -24,7 +24,7 @@ public class Lab2 {
 		boolean buyMore = IR4.getYorN("Would you like to buy another product?");
 
 	}
-
+//test
 	public static boolean shipping(int finalPrice){
 		if (finalPrice < shippingCost[1]){
 			return true;
