@@ -18,23 +18,33 @@ public class Lab1 {
 	private static int departureTime;
 
 	public static void main(String[] args) {
+		//Get Arrival Day
 		String arrivalDay = getDay("Please enter the day of the week (mon, tue, wed, thu, fri, sat, sun):");
+		
+		//Get Arrival Time
 		int arrivalTime = getTime("Please enter the vehicle’s arrival time (HHMM)");
+		
+		//Figure out if they stay over a day
 		departureDay = IR4.getYorN("Did the customer leave the same day they arrived?");
-		if (departureDay){
-			do{
+		if (departureDay) {
+			do {
 				departureTime = getTime("Please enter the vehicle’s departure time (HHMM):");
-			}while(departureTime < arrivalTime);
-			
-			
-		}else {
+			} while (departureTime < arrivalTime);
+
+		} else {
 			departureTime = getTime("Please enter the vehicle’s departure time (HHMM):");
 		}
-		System.out.printf("Day of week: " + arrivalDay + ", Parking duration in minutes: " + (calcHourDiff(arrivalTime, departureTime)) * 15 + ", rate: $" + df.format(chargeRate(arrivalDay)) + ", amount charged: $" + df.format(totalPrice(arrivalDay, arrivalTime, departureTime)));
+		
+		//Print out all the info
+		System.out.printf("Day of week: " + arrivalDay + ", Parking duration in minutes: "
+				+ (calcHourDiff(arrivalTime, departureTime)) * 15 + ", rate: $" + df.format(chargeRate(arrivalDay))
+				+ ", amount charged: $" + df.format(totalPrice(arrivalDay, arrivalTime, departureTime)));
 		keyboard.close();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
+	
+	//Make sure time is between 0 and 2359. Note, time cannot be 2400.
 	public static int getTime(String userInputTime) {
 		boolean userTimeSelection = false;
 		int answer = 0;
@@ -49,9 +59,10 @@ public class Lab1 {
 		}
 		return answer;
 	}
-
+	
+	//Make sure user inputs the correct day input
 	public static String getDay(String userInputDay) {
-		String[] validDays = { "mon", "tue", "wed", "thr", "fri", "sat", "sun" };
+		String[] validDays = { "mon", "tue", "wed", "thu", "fri", "sat", "sun" };
 		boolean userDaySelection = false;
 		String answer = "";
 		while (!userDaySelection) {
@@ -66,7 +77,8 @@ public class Lab1 {
 		}
 		return answer;
 	}
-
+	
+	//All the math for getting the total time they stayed
 	public static double calcHourDiff(int arrT, int depT) {
 		int arrHourToMin = ((arrT / 100) * 60);
 		int depHourToMin = ((depT / 100) * 60);
@@ -81,6 +93,7 @@ public class Lab1 {
 
 	}
 
+	//All the math for getting the total price
 	public static double totalPrice(String aDay, int aT, int dT) {
 
 		chargeRate(aDay);
@@ -96,6 +109,7 @@ public class Lab1 {
 		}
 	}
 
+	//Figure out the rate
 	public static double chargeRate(String dayMatch) {
 		if (dayMatch.matches("mon|tue|wed|thr|fri")) {
 			rate = 1.25;
