@@ -85,6 +85,21 @@ public class IR4 {
       return number;
    }
    
+   /** Gets an integer greater than the supplied parameter. 
+    * Rejects null entries, any number of spaces, and non-numbers.
+    * @param msg is the text that will be displayed the user to ask them to enter a value.
+    * @param low is the highest unacceptable input value. 
+    * @return Returns an double from the keyboard. 
+    */ 
+  public static double getDoubleGT(String msg, double low, String errorMsg) {
+     double number = getDouble(msg);
+     while (number <= low) {
+        System.err.println(errorMsg);
+        number = getInteger(msg);
+     }
+     return number;
+  }
+   
    /** Gets an integer greater than or equal to the supplied parameter. 
      * Rejects null entries, any number of spaces, and non-numbers.
      * @param msg is the text that will be displayed the user to ask them to enter a value.

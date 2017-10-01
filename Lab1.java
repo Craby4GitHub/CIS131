@@ -3,6 +3,10 @@
   * Lab1.java
   * Author: Will Crabtree
   * CIS 131: Programming and Problem Solving II
+  * 
+  * Asks for the arrival day and time of the customer. Then if they left the same day, and lastly the departure time.
+  * Then calculate how much they owe.
+  * 
   ********************************************************************************************************************/
 import java.text.DecimalFormat;
 import java.util.Scanner;
