@@ -32,17 +32,24 @@ public class Lab2 {
 			{ "Large Cap", 9.00, 3 } };
 
 	public static void main(String[] args) {
+		// Create loop to user can input multiple items
 		boolean buyMore;
 		do {
+			
 			printProducts(productList);
 			printDiscounts();
-
+			
+			// Get product that user wants to buy
 			int productSelection = getProduct("Please select the Product #.");
+			
+			// Get quanity of product that user wants to buy
 			int productQuanity = IR4.getIntegerGT("How many would you like to purchase?", 0, "Invalid number of items. Please enter a number greater than zero.");
-
+			
+			// Put those values into an array
 			cartProduct.add(productSelection);
 			cartQuanity.add(productQuanity);
-
+			
+			// Ask if they want to buy more
 			buyMore = IR4.getYorN("Would you like to buy another product?");
 		} while (buyMore);
 
@@ -50,6 +57,7 @@ public class Lab2 {
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
+	// Print the totals of all the things
 	public static void printTotals() {
 		for (int i = 0; i < cartProduct.size(); i++) {
 			System.out.println("Product " + cartProduct.get(i) + ": " + productList[cartProduct.get(i)][0]
@@ -72,6 +80,7 @@ public class Lab2 {
 		printProducts(test);
 	}
 
+	// Figure out of there are any discounts the user gets
 	public static double discountCalc() {
 
 		int result = 0;
@@ -89,6 +98,7 @@ public class Lab2 {
 		}
 	}
 
+	// Get the total price of the users cart
 	public static double priceOfProducts() {
 		double result = 0;
 		for (int i = 0; i < cartProduct.size(); i++) {
@@ -97,11 +107,13 @@ public class Lab2 {
 		return result;
 	}
 
+	// Get the total price of a hat times quantity
 	public static double getTotal(int c) {
 		double price = (Double) productList[cartProduct.get(c)][1] * cartQuanity.get(c);
 		return price;
 	}
 
+	// Get product number from user, with validation
 	public static int getProduct(String productNumber) {
 		boolean selectionError = false;
 		int answer = 0;
@@ -120,6 +132,7 @@ public class Lab2 {
 		return answer;
 	}
 
+	// Figure out if they get a shipping discount
 	public static int shipping(double netPrice) {
 		if (netPrice < shippingCost[1]) {
 			return shippingCost[0];
@@ -128,6 +141,7 @@ public class Lab2 {
 		}
 	}
 
+	
 	private static void printProducts(Object[][] array) {
 		for (Object[] row : array) {
 			printRow(row);
@@ -141,7 +155,8 @@ public class Lab2 {
 		}
 		System.out.println();
 	}
-
+	
+	// Show all the discounts
 	private static void printDiscounts() {
 		System.out.println("Discounts available:");
 		System.out.printf("%.0f", smallDiscount * 100);
