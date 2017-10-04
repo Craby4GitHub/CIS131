@@ -11,18 +11,18 @@ import java.util.Random;
 
 public class Lab4 {
 
-	private static final int[] intArray = new int[10];
+	static int[] intArray = new int[10];
+	static int indexHighest;
+	static int arrayHighestValue;
+	static int indexLowest;
+	static int arrayLowestValue;
+	static int arraySum = 0;
+	static double arrayAverage;
 
 	public static void main(String[] args) {
 
-		int indexHighest;
-		int indexLowest;
-		int arraySum;
-		double arrayAverage;
 		randomNumber();
-		System.out.println("Orginal order");
-		printArray();
-
+		displayMethod();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
@@ -32,15 +32,15 @@ public class Lab4 {
 		int max = 300;
 		int min = 1;
 		Random rand = new Random();
-		for (int i = 0; i < intArray.length; i++){
+		for (int i = 0; i < intArray.length; i++) {
 			int value = rand.nextInt((max - min) + 1) + min;
 			intArray[(int) i] = value;
 		}
 	}
 
 	// Displays all the elements in the array
-	public static void printArray() {
-		for (Object i: intArray) {
+	public static void printArray(int[] array) {
+		for (Object i : array) {
 			System.out.print(i);
 			System.out.print("\t");
 		}
@@ -54,29 +54,53 @@ public class Lab4 {
 
 	// Identifies and returns the index of the highest value in the array
 	public static void indexHighestMethod() {
-		int highestIndexValue = intArray[0];
-		for (int i = 0; i < highestIndexValue; i++){
-			//ADD STUFF
+		for (int i = 0; i < intArray.length; i++) {
+			if (arrayHighestValue < intArray[i]) {
+				indexHighest = i;
+				arrayHighestValue = intArray[i];
+			}
 		}
 	}
 
 	// Identifies and returns the index of the lowest value in the array
 	public static void indexLowestMethod() {
-		// DO THIS
+		for (int i = 0; i < intArray.length; i++) {
+			// arrayLowestValue = intArray[0];
+			if (intArray[i] < arrayLowestValue) {
+				indexLowest = i;
+				arrayLowestValue = intArray[i];
+			}
+		}
 	}
 
 	// Defines a method that calculates the sum of the array elements
 	public static void arraySumMethod() {
-		// DO THIS
+		for (int i = 0; i < intArray.length; i++) {
+			arraySum += intArray[i];
+		}
 	}
 
 	// Calculates the average of the array elements
 	public static void arrayAverageMethod() {
-		// DO THIS
+		arrayAverage = arraySum / intArray.length;
 	}
 
-	// Displays the results calculated by the methods described in items 5 through 8.
-	public static void displayMethod(){
-			//DO THIS
+	// Displays the results calculated by the methods
+	private static void displayMethod() {
+
+		System.out.println("Orginal order");
+		printArray(intArray);
+
+		indexHighestMethod();
+		System.out.println("Highest index is " + indexHighest + " and its value is " + arrayHighestValue);
+
+		indexLowestMethod();
+		System.out.println("Lowest index is " + indexLowest + " and its value is " + arrayLowestValue);
+
+		arraySumMethod();
+		System.out.println("Sum value is " + arraySum);
+
+		arrayAverageMethod();
+		System.out.println("Sum value is " + arrayAverage);
 	}
 }
