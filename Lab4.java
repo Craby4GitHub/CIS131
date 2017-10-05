@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /********************************************************************************************************************
  * Lab4.java Author: Will Crabtree CIS 131: Programming and Problem Solving II
  * 
@@ -24,7 +22,7 @@ public class Lab4 {
 		
 		
 		randomNumber();
-		displayMethod();
+		getDisplayMethod();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
@@ -32,10 +30,8 @@ public class Lab4 {
 	// Assigns a random value from 1 to 300 to each array element
 	public static void randomNumber() {
 		int max = 300;
-		int min = 1;
-		Random rand = new Random();
 		for (int i = 0; i < intArray.length; i++) {
-			int value = rand.nextInt((max - min) + 1) + min;
+			int value = (int)(Math.random() * (max + 1));
 			intArray[(int) i] = value;
 		}
 	}
@@ -55,7 +51,7 @@ public class Lab4 {
 	}
 
 	// Identifies and returns the index of the highest value in the array
-	public static void indexHighestMethod() {
+	public static void getIndexHighestMethod() {
 		for (int i = 0; i < intArray.length; i++) {
 			if (arrayHighestValue < intArray[i]) {
 				indexHighest = i;
@@ -65,7 +61,7 @@ public class Lab4 {
 	}
 
 	// Identifies and returns the index of the lowest value in the array
-	public static void indexLowestMethod() {
+	public static void getIndexLowestMethod() {
 		for (int i = 0; i < intArray.length; i++) {
 			// arrayLowestValue = intArray[0];
 			if (intArray[i] < arrayLowestValue) {
@@ -76,33 +72,33 @@ public class Lab4 {
 	}
 
 	// Defines a method that calculates the sum of the array elements
-	public static void arraySumMethod() {
+	public static void getArraySumMethod() {
 		for (int i = 0; i < intArray.length; i++) {
 			arraySum += intArray[i];
 		}
 	}
 
 	// Calculates the average of the array elements
-	public static void arrayAverageMethod() {
+	public static void getArrayAverage() {
 		arrayAverage = arraySum / intArray.length;
 	}
 
 	// Displays the results calculated by the methods
-	private static void displayMethod() {
+	private static void getDisplayMethod() {
 
 		System.out.println("Orginal order");
 		printArray(intArray);
 
-		indexHighestMethod();
+		getIndexHighestMethod();
 		System.out.println("Highest index is " + indexHighest + " and its value is " + arrayHighestValue);
 
-		indexLowestMethod();
+		getIndexLowestMethod();
 		System.out.println("Lowest index is " + indexLowest + " and its value is " + arrayLowestValue);
 
-		arraySumMethod();
+		getArraySumMethod();
 		System.out.println("Sum value is " + arraySum);
 
-		arrayAverageMethod();
-		System.out.println("Sum value is " + arrayAverage);
+		getArrayAverage();
+		System.out.println("Average value is " + arrayAverage);
 	}
 }

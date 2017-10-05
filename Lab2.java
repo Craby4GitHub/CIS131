@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lab2 {
+	
 	private static DecimalFormat df = new DecimalFormat("#.00");
 	static List<Integer> cartProduct = new ArrayList<Integer>();
 	static List<Integer> cartQuanity = new ArrayList<Integer>();
@@ -35,50 +36,30 @@ public class Lab2 {
 		// Create loop to user can input multiple items
 		boolean buyMore;
 		do {
-			
+
 			printProducts(productList);
 			printDiscounts();
-			
+
 			// Get product that user wants to buy
 			int productSelection = getProduct("Please select the Product #.");
-			
-			// Get quanity of product that user wants to buy
+
+			// Get quantity of product that user wants to buy
 			int productQuanity = IR4.getIntegerGT("How many would you like to purchase?", 0, "Invalid number of items. Please enter a number greater than zero.");
-			
+
 			// Put those values into an array
 			cartProduct.add(productSelection);
 			cartQuanity.add(productQuanity);
-			
+
 			// Ask if they want to buy more
 			buyMore = IR4.getYorN("Would you like to buy another product?");
+			
 		} while (buyMore);
 
 		printTotals();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
-	// Print the totals of all the things
-	public static void printTotals() {
-		for (int i = 0; i < cartProduct.size(); i++) {
-			System.out.println("Product " + cartProduct.get(i) + ": " + productList[cartProduct.get(i)][0]
-					+ " unit price: $" + df.format(productList[cartProduct.get(i)][1]) + " - quantity: "
-					+ cartQuanity.get(i) + " - Total price: $" + df.format(getTotal(i)));
-		}
 
-		double priceOfProducts = priceOfProducts();
-		double discount = discountCalc();
-		double netPurchaseAmount = priceOfProducts() - discountCalc();
-		int shippingCost = shipping(priceOfProducts() - discountCalc());
-		double totalCost = netPurchaseAmount + shippingCost;
-
-		Object[][] test = { 
-				{ "Product Total: ", df.format(priceOfProducts) }, 
-				{ "Discount: ", df.format(discount) },
-				{ "Net Amount: ", df.format(netPurchaseAmount) }, 
-				{ "Shipping Cost: ", df.format(shippingCost) },
-				{ "Total Cost: ", df.format(totalCost) }, };
-		printProducts(test);
-	}
 
 	// Figure out of there are any discounts the user gets
 	public static double discountCalc() {
@@ -88,18 +69,18 @@ public class Lab2 {
 			result += cartQuanity.get(i);
 		}
 		if ((result <= smallDiscountRange[1]) && (result >= smallDiscountRange[0])) {
-			return smallDiscount * priceOfProducts();
+			return smallDiscount * getPriceOfProducts();
 		} else if ((result <= mediumDiscountRange[1]) && (result >= mediumDiscountRange[0])) {
-			return mediumDiscount * priceOfProducts();
+			return mediumDiscount * getPriceOfProducts();
 		} else if (result >= largeDiscountRange[0]) {
-			return largeDiscount * priceOfProducts();
+			return largeDiscount * getPriceOfProducts();
 		} else {
-			return 1 * priceOfProducts();
+			return 1 * getPriceOfProducts();
 		}
 	}
 
 	// Get the total price of the users cart
-	public static double priceOfProducts() {
+	public static double getPriceOfProducts() {
 		double result = 0;
 		for (int i = 0; i < cartProduct.size(); i++) {
 			result += getTotal(i);
@@ -133,7 +114,7 @@ public class Lab2 {
 	}
 
 	// Figure out if they get a shipping discount
-	public static int shipping(double netPrice) {
+	public static int getShippingCost(double netPrice) {
 		if (netPrice < shippingCost[1]) {
 			return shippingCost[0];
 		} else {
@@ -141,13 +122,42 @@ public class Lab2 {
 		}
 	}
 
+	/*
+	*	All the display methods
+	*/
+
+	// Print the totals of all the things
+	public static void printTotals() {
+
+		for (int i = 0; i < cartProduct.size(); i++) {
+			System.out.printf("Product " + cartProduct.get(i) + ": " + productList[cartProduct.get(i)][0]);
+			System.out.printf(" Unit price: $" + "%.2f", productList[cartProduct.get(i)][1]);
+			System.out.printf(" Quantity: " + cartQuanity.get(i));
+			System.out.printf(" Total price: $" + "%.2f", getTotal(i));
+			System.out.println();
+		}
+
+		double priceOfProducts = getPriceOfProducts();
+		double discount = discountCalc();
+		double netPurchaseAmount = getPriceOfProducts() - discountCalc();
+		int shippingCost = getShippingCost(getPriceOfProducts() - discountCalc());
+		double totalCost = netPurchaseAmount + shippingCost;
+
+		Object[][] differentWayOfPrinting = { { "Product Total: ", df.format(priceOfProducts) },
+				{ "Discount: ", df.format(discount) }, { "Net Amount: ", df.format(netPurchaseAmount) },
+				{ "Shipping Cost: ", df.format(shippingCost) }, { "Total Cost: ", df.format(totalCost) }, };
+		printProducts(differentWayOfPrinting);
+
+	}
 	
+	// Print multiDimensional array
 	private static void printProducts(Object[][] array) {
 		for (Object[] row : array) {
 			printRow(row);
 		}
 	}
 
+	// Print single array
 	private static void printRow(Object[] row) {
 		for (Object i : row) {
 			System.out.print(i);
@@ -155,8 +165,8 @@ public class Lab2 {
 		}
 		System.out.println();
 	}
-	
-	// Show all the discounts
+
+	// Print all the discounts
 	private static void printDiscounts() {
 		System.out.println("Discounts available:");
 		System.out.printf("%.0f", smallDiscount * 100);
