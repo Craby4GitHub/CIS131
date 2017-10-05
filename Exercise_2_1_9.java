@@ -4,7 +4,7 @@
  * Exercise 1_9
  */
 
-public class Exercise1_9 {
+public class Exercise_2_1_9 {
 	public static void main(String[] args) {
 		boolean continueCalc = true;
 		do {
