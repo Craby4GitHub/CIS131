@@ -1,5 +1,7 @@
 /********************************************************************************************************************
- * Lab4.java Author: Will Crabtree CIS 131: Programming and Problem Solving II
+ * Lab4.java 
+ * Author: Will Crabtree 
+ * CIS 131: Programming and Problem Solving II
  * 
  * Shows user the products they can buy and the possible discounts. Then has
  * user input corresponding product number and quantity. Once done, it will
@@ -20,21 +22,12 @@ public class Lab4 {
 	public static void main(String[] args) {
 
 		
-		
-		randomNumber();
+		IR4.getRandomNumber(0,300);
+
 		getDisplayMethod();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
-
-	// Assigns a random value from 1 to 300 to each array element
-	public static void randomNumber() {
-		int max = 300;
-		for (int i = 0; i < intArray.length; i++) {
-			int value = (int)(Math.random() * (max + 1));
-			intArray[(int) i] = value;
-		}
-	}
 
 	// Displays all the elements in the array
 	public static void printArray(int[] array) {
