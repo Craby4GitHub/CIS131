@@ -92,9 +92,9 @@ public class Lab1 {
 		double depMin = (depT % 100);
 
 		if (departureDay) {
-			return Math.round((((depHourToMin + depMin) - (arrHourToMin + arrMin)) / 15));
+			return Math.ceil((((depHourToMin + depMin) - (arrHourToMin + arrMin)) / 15));
 		} else {
-			return Math.round((((1440 - (arrHourToMin + arrMin)) + (depHourToMin + depMin)) / 15));
+			return Math.ceil((((1440 - (arrHourToMin + arrMin)) + (depHourToMin + depMin)) / 15));
 		}
 
 	}
@@ -117,7 +117,7 @@ public class Lab1 {
 
 	// Figure out the rate
 	public static double chargeRate(String dayMatch) {
-		if (dayMatch.matches("mon|tue|wed|thr|fri")) {
+		if (dayMatch.matches("mon|tue|wed|thu|fri")) {
 			rate = 1.25;
 			minFee = 3;
 			maxFee = 20;

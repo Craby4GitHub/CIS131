@@ -10,13 +10,12 @@
   * 
   ********************************************************************************************************************/
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Lab2 {
 	
-	private static DecimalFormat df = new DecimalFormat("#.00");
+
 	static List<Integer> cartProduct = new ArrayList<Integer>();
 	static List<Integer> cartQuanity = new ArrayList<Integer>();
 	private static double smallDiscount = .10;
@@ -33,11 +32,11 @@ public class Lab2 {
 			{ "Large Cap", 9.00, 3 } };
 
 	public static void main(String[] args) {
-		// Create loop to user can input multiple items
+		// Loop to user can input multiple items
 		boolean buyMore;
 		do {
 
-			printProducts(productList);
+			printmultiDimensionalArray(productList);
 			printDiscounts();
 
 			// Get product that user wants to buy
@@ -75,7 +74,7 @@ public class Lab2 {
 		} else if (result >= largeDiscountRange[0]) {
 			return largeDiscount * getPriceOfProducts();
 		} else {
-			return 1 * getPriceOfProducts();
+			return 0;
 		}
 	}
 
@@ -140,25 +139,29 @@ public class Lab2 {
 		double priceOfProducts = getPriceOfProducts();
 		double discount = discountCalc();
 		double netPurchaseAmount = getPriceOfProducts() - discountCalc();
-		int shippingCost = getShippingCost(getPriceOfProducts() - discountCalc());
+		double shippingCost = getShippingCost(getPriceOfProducts() - discountCalc());
 		double totalCost = netPurchaseAmount + shippingCost;
 
-		Object[][] differentWayOfPrinting = { { "Product Total: ", df.format(priceOfProducts) },
-				{ "Discount: ", df.format(discount) }, { "Net Amount: ", df.format(netPurchaseAmount) },
-				{ "Shipping Cost: ", df.format(shippingCost) }, { "Total Cost: ", df.format(totalCost) }, };
-		printProducts(differentWayOfPrinting);
-
+		System.out.printf("Product Total: " + "%.2f", priceOfProducts);
+		System.out.println();
+		System.out.printf("Discount: " + "%.2f", discount);
+		System.out.println();
+		System.out.printf("Net Amount: " + "%.2f", netPurchaseAmount);
+		System.out.println();
+		System.out.printf("Shipping Cost: " + "%.2f", shippingCost);
+		System.out.println();
+		System.out.printf("Total Cost: " + "%.2f", totalCost);
 	}
 	
 	// Print multiDimensional array
-	private static void printProducts(Object[][] array) {
+	private static void printmultiDimensionalArray(Object[][] array) {
 		for (Object[] row : array) {
-			printRow(row);
+			printSingleArray(row);
 		}
 	}
 
 	// Print single array
-	private static void printRow(Object[] row) {
+	private static void printSingleArray(Object[] row) {
 		for (Object i : row) {
 			System.out.print(i);
 			System.out.print("\t");

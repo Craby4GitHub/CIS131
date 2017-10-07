@@ -16,15 +16,45 @@ public class Lab3 {
 	private static double loanAmount;
 
 	public static void main(String[] args) {
-		loanAmount = IR4.getIntegerGT("Enter the loan amount : ", 0, "You must put a postive value");
+		//loanAmount = IR4.getIntegerGT("Enter the loan amount : ", 0, "You must put a postive value");
 		startingInterest = IR4.getDoubleGT("Enter the starting annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
-		//endingInterest = IR4.getIntegerGT("Enter the ending annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
-		int firstTerm = IR4.getIntegerGT("Enter the first term in years for calculating payments : ", 0, "You must put a positive value");
+		endingInterest = IR4.getDoubleGT("Enter the ending annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
+		printInterestSteps();
+		//int firstTerm = IR4.getIntegerGT("Enter the first term in years for calculating payments : ", 0, "You must put a positive value");
 		//int lastTerm = IR4.getIntegerGT("Enter the last term in years for calculating payments : ", 0, "You must put a positive value");
-		System.out.printf("%.2f", monthlyPayment(startingInterest, firstTerm));
-
+		//System.out.printf("%.2f", monthlyPayment(startingInterest, firstTerm));
+	
 	}
 	// -----------------------------------------------------------------------------------------------------------------
+	
+	public static void printInterestSteps(){
+		double lowerInterestFirst;
+		double higherInterestLast;
+		if (startingInterest <  endingInterest){
+			lowerInterestFirst = startingInterest;
+			higherInterestLast = endingInterest;
+			
+		}else{
+			lowerInterestFirst = endingInterest;
+			higherInterestLast = startingInterest;
+		}
+
+		for (double i = lowerInterestFirst; i <= higherInterestLast;i += .25){
+			System.out.printf("%.2f",i);
+			System.out.println();
+		}
+		
+	}
+	
+	
+	
+	
+	public static int calcNumberOfSteps(double interest1, double interest2){
+		int numberOfSteps = (int) Math.ceil(Math.abs(interest1 - interest2));
+		return numberOfSteps;
+	}
+	
+	
 	public static double convertToDouble(int percent) {
 		return percent / 100;
 	}
