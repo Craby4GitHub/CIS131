@@ -299,5 +299,19 @@ public class IR4 {
 	public static int getRandomNumber(int low, int high) {
 		return (int) (Math.random() * ((high + 1) - low)) + low;
 	}
+	// ------------------------------------------------------------------------------------------------------------------
+	/**
+	 * Generates a random double number between low and high, inclusive.
+	 * 
+	 * @param low
+	 *            is the smallest number that will be randomly generated.
+	 * @param high
+	 *            is the largest number that will be randomly generated.
+	 * @return Returns the random number as an double.
+	 */
+	public static double getRandomDoubleNumber(int low, int high) {
+		return (Math.random() * ((high + 1) - low)) + low;
+	}
+
 
 }// end of class
