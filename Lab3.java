@@ -16,6 +16,14 @@ public class Lab3 {
 	private static double loanAmount;
 
 	public static void main(String[] args) {
+		
+		//Quick testing
+		//loanAmount = 170000;
+		//startingInterest = 3.00;
+		//endingInterest = 3.00;
+		//firstTerm = 10;
+		//lastTerm = 50;
+		
 		loanAmount = IR4.getIntegerGT("Enter the loan amount : ", 0, "You must put a postive value");
 		startingInterest = IR4.getDoubleGT("Enter the starting annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
 		endingInterest = IR4.getDoubleGT("Enter the ending annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
@@ -48,20 +56,20 @@ public class Lab3 {
 			higherYearLast = firstTerm;
 		}
 		
-		System.out.printf("Rate\t");
+		System.out.printf("%-8s", "Rate");
 		int year;
 		for (year = lowerYearFirst; year <= higherYearLast; year += 5){
-			System.out.print(year + " years\t");
+			System.out.printf("%-15s", year + " years");
 			
 		}
 		System.out.println();
 		
 		for (year = lowerYearFirst; year <= higherYearLast; year += 5){
 			for (double rate = lowerInterestFirst; rate <= higherInterestLast;rate += .25){
-				System.out.printf("%1.2f\t",rate);
+				System.out.printf("%-8.2f",rate);
 				
 				for (year = lowerYearFirst; year <= higherYearLast; year += 5){
-					System.out.printf("%.2f\t\t",monthlyPayment(rate, year));
+					System.out.printf("%-15.2f",monthlyPayment(rate, year));
 				}
 				System.out.println();
 			}
