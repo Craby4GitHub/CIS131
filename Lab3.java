@@ -4,32 +4,33 @@
   * Author: Will Crabtree
   * CIS 131: Programming and Problem Solving II
   * 
-  * Shows user the products they can buy and the possible discounts.
-  * Then has user input corresponding product number and quantity.
-  * Once done, it will print out the totals of everything.
+  * GEt input from user asking for loan amount, starting/ending interest and the number of years
   * 
   ********************************************************************************************************************/
 
 public class Lab3 {
+	private static int firstTerm = 0;
+	private static int lastTerm = 0;
 	private static double endingInterest;
 	private static double startingInterest;
 	private static double loanAmount;
 
 	public static void main(String[] args) {
-		//loanAmount = IR4.getIntegerGT("Enter the loan amount : ", 0, "You must put a postive value");
+		loanAmount = IR4.getIntegerGT("Enter the loan amount : ", 0, "You must put a postive value");
 		startingInterest = IR4.getDoubleGT("Enter the starting annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
 		endingInterest = IR4.getDoubleGT("Enter the ending annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
-		printInterestSteps();
-		//int firstTerm = IR4.getIntegerGT("Enter the first term in years for calculating payments : ", 0, "You must put a positive value");
-		//int lastTerm = IR4.getIntegerGT("Enter the last term in years for calculating payments : ", 0, "You must put a positive value");
-		//System.out.printf("%.2f", monthlyPayment(startingInterest, firstTerm));
-	
+		firstTerm = IR4.getIntegerGT("Enter the first term in years for calculating payments : ", 0, "You must put a positive value");
+		lastTerm = IR4.getIntegerGT("Enter the last term in years for calculating payments : ", 0, "You must put a positive value");
+		printEverything();
 	}
 	// -----------------------------------------------------------------------------------------------------------------
 	
-	public static void printInterestSteps(){
+	public static void printEverything(){
 		double lowerInterestFirst;
 		double higherInterestLast;
+		int lowerYearFirst = 0;
+		int higherYearLast = 0;
+		
 		if (startingInterest <  endingInterest){
 			lowerInterestFirst = startingInterest;
 			higherInterestLast = endingInterest;
@@ -38,26 +39,35 @@ public class Lab3 {
 			lowerInterestFirst = endingInterest;
 			higherInterestLast = startingInterest;
 		}
-
-		for (double i = lowerInterestFirst; i <= higherInterestLast;i += .25){
-			System.out.printf("%.2f",i);
-			System.out.println();
+		if (firstTerm <  lastTerm){
+			lowerYearFirst = firstTerm;
+			higherYearLast = lastTerm;
+			
+		}else{
+			lowerYearFirst = lastTerm;
+			higherYearLast = firstTerm;
 		}
 		
+		System.out.printf("Rate\t");
+		int year;
+		for (year = lowerYearFirst; year <= higherYearLast; year += 5){
+			System.out.print(year + " years\t");
+			
+		}
+		System.out.println();
+		
+		for (year = lowerYearFirst; year <= higherYearLast; year += 5){
+			for (double rate = lowerInterestFirst; rate <= higherInterestLast;rate += .25){
+				System.out.printf("%1.2f\t",rate);
+				
+				for (year = lowerYearFirst; year <= higherYearLast; year += 5){
+					System.out.printf("%.2f\t\t",monthlyPayment(rate, year));
+				}
+				System.out.println();
+			}
+		}
 	}
-	
-	
-	
-	
-	public static int calcNumberOfSteps(double interest1, double interest2){
-		int numberOfSteps = (int) Math.ceil(Math.abs(interest1 - interest2));
-		return numberOfSteps;
-	}
-	
-	
-	public static double convertToDouble(int percent) {
-		return percent / 100;
-	}
+
 	public static double monthlyPayment(double interest, int term){
 		double monthlyInterestRate = (interest / 100) / 12;
 		int monthToPay = term *12;

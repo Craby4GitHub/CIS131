@@ -3,9 +3,7 @@
  * Author: Will Crabtree 
  * CIS 131: Programming and Problem Solving II
  * 
- * Shows user the products they can buy and the possible discounts. Then has
- * user input corresponding product number and quantity. Once done, it will
- * print out the totals of everything.
+ * 
  * 
  ********************************************************************************************************************/
 
