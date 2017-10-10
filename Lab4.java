@@ -8,30 +8,37 @@
  ********************************************************************************************************************/
 
 public class Lab4 {
-
-	static int[] intArray = new int[10];
+	static int maxArraySize = 10;
+	static int[] intArray = new int[maxArraySize];
 	static int indexHighest;
 	static int arrayHighestValue;
 	static int indexLowest;
 	static int arrayLowestValue;
-	static int arraySum = 0;
+	static double arraySum;
 	static double arrayAverage;
 
 	public static void main(String[] args) {
 
+		genRanInts();
+			
 		
-		IR4.getRandomNumber(0,300);
-
 		getDisplayMethod();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
+	
+	// Puts Data into array
+	public static void genRanInts() {
+		for(int i = 0;i < maxArraySize;i++){
+			intArray[i] = IR4.getRandomNumber(0,300);
+		}
+	}
 
 	// Displays all the elements in the array
 	public static void printArray(int[] array) {
 		for (Object i : array) {
-			System.out.print(i);
-			System.out.print("\t");
+			System.out.printf("%-5d", i);
+			//System.out.print("\t");
 		}
 		System.out.println();
 	}
@@ -44,23 +51,24 @@ public class Lab4 {
 	// Identifies and returns the index of the highest value in the array
 	public static void getIndexHighestMethod() {
 		for (int i = 0; i < intArray.length; i++) {
-			if (arrayHighestValue < intArray[i]) {
-				indexHighest = i;
+			if (intArray[i] > arrayHighestValue) {
 				arrayHighestValue = intArray[i];
-			}
+				indexHighest = i;
+				}
 		}
 	}
 
 	// Identifies and returns the index of the lowest value in the array
 	public static void getIndexLowestMethod() {
+		arrayLowestValue = intArray[0];
 		for (int i = 0; i < intArray.length; i++) {
-			// arrayLowestValue = intArray[0];
 			if (intArray[i] < arrayLowestValue) {
-				indexLowest = i;
 				arrayLowestValue = intArray[i];
-			}
+				indexLowest = i;
+				}
 		}
 	}
+
 
 	// Defines a method that calculates the sum of the array elements
 	public static void getArraySumMethod() {
@@ -77,19 +85,21 @@ public class Lab4 {
 	// Displays the results calculated by the methods
 	private static void getDisplayMethod() {
 
-		System.out.println("Orginal order");
+		System.out.println("Original order");
 		printArray(intArray);
 
 		getIndexHighestMethod();
-		System.out.println("Highest index is " + indexHighest + " and its value is " + arrayHighestValue);
+		System.out.println("The index of the highest value is " + indexHighest + " and its value is " + arrayHighestValue);
 
 		getIndexLowestMethod();
-		System.out.println("Lowest index is " + indexLowest + " and its value is " + arrayLowestValue);
+		System.out.println("The index of the lowest value is " + indexLowest + " and its value is " + arrayLowestValue);
 
 		getArraySumMethod();
-		System.out.println("Sum value is " + arraySum);
+		System.out.print("The sum of the array elements is ");
+		System.out.printf("%.0f\n", arraySum);
 
 		getArrayAverage();
-		System.out.println("Average value is " + arrayAverage);
+		System.out.print("The average of the array elements is ");
+		System.out.printf("%.2f", arrayAverage);
 	}
 }
