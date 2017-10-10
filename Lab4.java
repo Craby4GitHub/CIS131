@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /********************************************************************************************************************
  * Lab4.java 
  * Author: Will Crabtree 
@@ -35,17 +37,13 @@ public class Lab4 {
 	}
 
 	// Displays all the elements in the array
+	// Also dynamic spacing!
 	public static void printArray(int[] array) {
 		for (Object i : array) {
-			System.out.printf("%-5d", i);
-			//System.out.print("\t");
+			int spacing = (String.valueOf(i).length() + 2);
+			System.out.printf("%-" + spacing + "d", i);
 		}
 		System.out.println();
-	}
-
-	// Sorts the array using the insertion technique
-	public static void sortArray() {
-		// DO THIS
 	}
 
 	// Identifies and returns the index of the highest value in the array
@@ -85,8 +83,9 @@ public class Lab4 {
 	// Displays the results calculated by the methods
 	private static void getDisplayMethod() {
 
-		System.out.println("Original order");
+		System.out.println("Original Array order");
 		printArray(intArray);
+
 
 		getIndexHighestMethod();
 		System.out.println("The index of the highest value is " + indexHighest + " and its value is " + arrayHighestValue);
@@ -95,11 +94,14 @@ public class Lab4 {
 		System.out.println("The index of the lowest value is " + indexLowest + " and its value is " + arrayLowestValue);
 
 		getArraySumMethod();
-		System.out.print("The sum of the array elements is ");
-		System.out.printf("%.0f\n", arraySum);
+		System.out.printf("The sum of the array elements is " + "%.0f\n", arraySum);
 
 		getArrayAverage();
-		System.out.print("The average of the array elements is ");
-		System.out.printf("%.2f", arrayAverage);
+		System.out.printf("The average of the array elements is " + "%.2f\n", arrayAverage);
+		
+		System.out.println("Sorted Array");
+		Arrays.sort(intArray);
+		printArray(intArray);
+
 	}
 }
