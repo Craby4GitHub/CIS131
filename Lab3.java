@@ -17,18 +17,23 @@ public class Lab3 {
 
 	public static void main(String[] args) {
 		
-		//Quick testing
-		//loanAmount = 170000;
-		//startingInterest = 3.00;
-		//endingInterest = 3.00;
-		//firstTerm = 10;
-		//lastTerm = 50;
 		
+		///*
+		//Quick testing
+		loanAmount = 170000;
+		startingInterest = 3.00;
+		endingInterest = 4.00;
+		firstTerm = 10;
+		lastTerm = 50;
+		//*/
+		
+		/*
 		loanAmount = IR4.getIntegerGT("Enter the loan amount : ", 0, "You must put a postive value");
 		startingInterest = IR4.getDoubleGT("Enter the starting annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
 		endingInterest = IR4.getDoubleGT("Enter the ending annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
 		firstTerm = IR4.getIntegerGT("Enter the first term in years for calculating payments : ", 0, "You must put a positive value");
 		lastTerm = IR4.getIntegerGT("Enter the last term in years for calculating payments : ", 0, "You must put a positive value");
+		*/
 		printEverything();
 	}
 	// -----------------------------------------------------------------------------------------------------------------
@@ -39,6 +44,7 @@ public class Lab3 {
 		int lowerYearFirst = 0;
 		int higherYearLast = 0;
 		
+		// Make lower interest first
 		if (startingInterest <  endingInterest){
 			lowerInterestFirst = startingInterest;
 			higherInterestLast = endingInterest;
@@ -47,6 +53,8 @@ public class Lab3 {
 			lowerInterestFirst = endingInterest;
 			higherInterestLast = startingInterest;
 		}
+		
+		// Make lower term first
 		if (firstTerm <  lastTerm){
 			lowerYearFirst = firstTerm;
 			higherYearLast = lastTerm;
@@ -56,10 +64,11 @@ public class Lab3 {
 			higherYearLast = firstTerm;
 		}
 		
+		// Print out the headers
 		System.out.printf("%-8s", "Rate");
 		int year;
 		for (year = lowerYearFirst; year <= higherYearLast; year += 5){
-			System.out.printf("%-15s", year + " years");
+			System.out.printf("%-11s", year + " years");
 			
 		}
 		System.out.println();
@@ -69,7 +78,7 @@ public class Lab3 {
 				System.out.printf("%-8.2f",rate);
 				
 				for (year = lowerYearFirst; year <= higherYearLast; year += 5){
-					System.out.printf("%-15.2f",monthlyPayment(rate, year));
+					System.out.printf("%-11.2f",monthlyPayment(rate, year));
 				}
 				System.out.println();
 			}
