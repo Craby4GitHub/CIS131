@@ -11,7 +11,7 @@ public class Exercise_4_4_15 {
 
 	public static void main(String[] args) {
 		char userInput = IR4.getChar("Enter a letter: ");
-		System.out.print(convertLetterToNumber(userInput));
+		System.out.print("The letter " + userInput + " converts to " + convertLetterToNumber(userInput));
 	}
 
 	//------------------------------------------------------------------
