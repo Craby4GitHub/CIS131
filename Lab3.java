@@ -18,22 +18,22 @@ public class Lab3 {
 	public static void main(String[] args) {
 		
 		
-		///*
+		/*
 		//Quick testing
 		loanAmount = 170000;
 		startingInterest = 3.00;
 		endingInterest = 4.00;
 		firstTerm = 10;
 		lastTerm = 50;
-		//*/
+		*/
 		
-		/*
+		///*
 		loanAmount = IR4.getIntegerGT("Enter the loan amount : ", 0, "You must put a postive value");
-		startingInterest = IR4.getDoubleGT("Enter the starting annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
+		startingInterest = IR4.getDoubleGT("Enter the starting annual interest rate as a percent (n.nnn) : ", 0, "You must put a value above 0.");
 		endingInterest = IR4.getDoubleGT("Enter the ending annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
 		firstTerm = IR4.getIntegerGT("Enter the first term in years for calculating payments : ", 0, "You must put a positive value");
 		lastTerm = IR4.getIntegerGT("Enter the last term in years for calculating payments : ", 0, "You must put a positive value");
-		*/
+		//*/
 		printEverything();
 	}
 	// -----------------------------------------------------------------------------------------------------------------
@@ -43,6 +43,8 @@ public class Lab3 {
 		double higherInterestLast;
 		int lowerYearFirst = 0;
 		int higherYearLast = 0;
+		int yearIncrement = 5;
+		double interestIncrement = .25;
 		
 		// Make lower interest first
 		if (startingInterest <  endingInterest){
@@ -67,17 +69,17 @@ public class Lab3 {
 		// Print out the headers
 		System.out.printf("%-8s", "Rate");
 		int year;
-		for (year = lowerYearFirst; year <= higherYearLast; year += 5){
+		for (year = lowerYearFirst; year < (higherYearLast + yearIncrement); year += yearIncrement){
 			System.out.printf("%-11s", year + " years");
 			
 		}
 		System.out.println();
 		
-		for (year = lowerYearFirst; year <= higherYearLast; year += 5){
-			for (double rate = lowerInterestFirst; rate <= higherInterestLast;rate += .25){
+		for (year = lowerYearFirst; year <= (higherYearLast + yearIncrement); year += yearIncrement){
+			for (double rate = lowerInterestFirst; rate < (higherInterestLast + interestIncrement);rate += interestIncrement){
 				System.out.printf("%-8.2f",rate);
 				
-				for (year = lowerYearFirst; year <= higherYearLast; year += 5){
+				for (year = lowerYearFirst; year < (higherYearLast + yearIncrement); year += yearIncrement){
 					System.out.printf("%-11.2f",monthlyPayment(rate, year));
 				}
 				System.out.println();
