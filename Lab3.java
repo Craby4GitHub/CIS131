@@ -21,8 +21,8 @@ public class Lab3 {
 		///*
 		//Quick testing
 		loanAmount = IR4.getRandomNumber(0, 10000000);
-		startingInterest = 3.00;
-		endingInterest = 4.00;
+		startingInterest = IR4.getRandomDoubleNumber(1,20);
+		endingInterest = IR4.getRandomDoubleNumber(1,20);
 		firstTerm = IR4.getRandomNumber(1,50);
 		lastTerm = IR4.getRandomNumber(1,50);
 		//*/
