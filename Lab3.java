@@ -18,22 +18,22 @@ public class Lab3 {
 	public static void main(String[] args) {
 		
 		
-		/*
+		///*
 		//Quick testing
-		loanAmount = 170000;
+		loanAmount = IR4.getRandomNumber(0, 10000000);
 		startingInterest = 3.00;
 		endingInterest = 4.00;
-		firstTerm = 10;
-		lastTerm = 50;
-		*/
+		firstTerm = IR4.getRandomNumber(1,50);
+		lastTerm = IR4.getRandomNumber(1,50);
+		//*/
 		
-		///*
+		/*
 		loanAmount = IR4.getIntegerGT("Enter the loan amount : ", 0, "You must put a postive value");
 		startingInterest = IR4.getDoubleGT("Enter the starting annual interest rate as a percent (n.nnn) : ", 0, "You must put a value above 0.");
 		endingInterest = IR4.getDoubleGT("Enter the ending annual interest rate as a percent (n.nnn) : ", 0, "You must put a positive value");
 		firstTerm = IR4.getIntegerGT("Enter the first term in years for calculating payments : ", 0, "You must put a positive value");
 		lastTerm = IR4.getIntegerGT("Enter the last term in years for calculating payments : ", 0, "You must put a positive value");
-		//*/
+		*/
 		printEverything();
 	}
 	// -----------------------------------------------------------------------------------------------------------------
