@@ -16,23 +16,21 @@ public class Lab4 {
 	static int arrayHighestValue;
 	static int indexLowest;
 	static int arrayLowestValue;
-	static double arraySum;
+	static int arraySum;
 	static double arrayAverage;
 
 	public static void main(String[] args) {
 
 		genRanInts();
-			
-		
 		getDisplayMethod();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
-	
+
 	// Puts Data into array
 	public static void genRanInts() {
-		for(int i = 0;i < maxArraySize;i++){
-			intArray[i] = IR4.getRandomNumber(0,300);
+		for (int i = 0; i < maxArraySize; i++) {
+			intArray[i] = IR4.getRandomNumber(0, 300);
 		}
 	}
 
@@ -52,7 +50,7 @@ public class Lab4 {
 			if (intArray[i] > arrayHighestValue) {
 				arrayHighestValue = intArray[i];
 				indexHighest = i;
-				}
+			}
 		}
 	}
 
@@ -63,10 +61,9 @@ public class Lab4 {
 			if (intArray[i] < arrayLowestValue) {
 				arrayLowestValue = intArray[i];
 				indexLowest = i;
-				}
+			}
 		}
 	}
-
 
 	// Defines a method that calculates the sum of the array elements
 	public static void getArraySumMethod() {
@@ -77,7 +74,7 @@ public class Lab4 {
 
 	// Calculates the average of the array elements
 	public static void getArrayAverage() {
-		arrayAverage = arraySum / intArray.length;
+		arrayAverage = (double) arraySum / intArray.length;
 	}
 
 	// Displays the results calculated by the methods
@@ -86,7 +83,6 @@ public class Lab4 {
 		System.out.println("Original Array order");
 		printArray(intArray);
 
-
 		getIndexHighestMethod();
 		System.out.println("The index of the highest value is " + indexHighest + " and its value is " + arrayHighestValue);
 
@@ -94,11 +90,11 @@ public class Lab4 {
 		System.out.println("The index of the lowest value is " + indexLowest + " and its value is " + arrayLowestValue);
 
 		getArraySumMethod();
-		System.out.printf("The sum of the array elements is " + "%.0f\n", arraySum);
+		System.out.println("The sum of the array elements is " + arraySum);
 
 		getArrayAverage();
 		System.out.printf("The average of the array elements is " + "%.2f\n", arrayAverage);
-		
+
 		System.out.println("Sorted Array");
 		Arrays.sort(intArray);
 		printArray(intArray);
