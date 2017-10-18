@@ -12,6 +12,10 @@ public class ModulesCodingPractice {
 	static Scanner keyboard = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		
+		
+		int[] list = new int[5];
+		list = new int[6];
 
 		// #1 problem
 		// ---------------------------------------------------------------------------
