@@ -16,6 +16,41 @@
 public class Exercise_5_6_21 {
 
 	public static void main(String[] args) {
-		// int getnumber(char uppercase)
+		// User input, yay
+		String userString = IR4.getString("Enter a string: ");
+		
+		// Loopy loop
+		for (int i = 0; i < userString.length(); i++) {
+			
+			// check to see if the current iteration is a letter and if it is call getNumber to get its stuff
+			if (Character.isLetter(userString.charAt(i)))
+				System.out.print(getNumber(Character.toUpperCase(userString.charAt(i))));
+			else
+				
+				// else just print out the character
+				System.out.print(userString.charAt(i));
+		}
+		
+	}
+	
+	// Converts character to a letter
+	public static int getNumber(char uppercaseLetter) {
+
+		if (uppercaseLetter >= 'W')
+			return 9;
+		else if (uppercaseLetter >= 'T')
+			return 8;
+		else if (uppercaseLetter >= 'P')
+			return 7;
+		else if (uppercaseLetter >= 'M')
+			return 6;
+		else if (uppercaseLetter >= 'J')
+			return 5;
+		else if (uppercaseLetter >= 'G')
+			return 4;
+		else if (uppercaseLetter >= 'D')
+			return 3;
+		else 
+			return 2;
 	}
 }
