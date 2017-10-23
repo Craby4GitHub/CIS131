@@ -1,3 +1,6 @@
+package Finished;
+import IR4;
+
 /*
  * Will Crabtree
  * CIS131
