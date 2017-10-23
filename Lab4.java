@@ -5,32 +5,63 @@ import java.util.Arrays;
  * Author: Will Crabtree 
  * CIS 131: Programming and Problem Solving II
  * 
+ * Generates x random numbers and displays them.
+ * Shows the highest index and its value.
+ * Shows the lowest index and its value.
+ * Shows the sum and then the average.
+ * Sorts the array and shows it
  * 
  * 
  ********************************************************************************************************************/
 
 public class Lab4 {
-	static int maxArraySize = 10;
-	static int[] intArray = new int[maxArraySize];
-	static int indexHighest;
-	static int arrayHighestValue;
-	static int indexLowest;
-	static int arrayLowestValue;
-	static int arraySum;
-	static double arrayAverage;
 
 	public static void main(String[] args) {
 
-		genRanInts();
-		getDisplayMethod();
+		// Step 1
+		int maxArraySize = 10;
+		int[] intArray = new int[maxArraySize];
+		int indexHighest = 0;
+		int indexLowest = 0;
+		int arraySum;
+		double arrayAverage;
+
+		// Step 2
+		genRanInts(intArray, maxArraySize);
+
+		// Step 3
+		System.out.println("Original Array order");
+		printArray(intArray);
+
+		// Step 4
+		indexHighest = getHighestMethod(intArray);
+
+		// Step 5
+		indexLowest = getLowestMethod(intArray, indexLowest);
+
+		// Step 6
+		arraySum = getArraySumMethod(intArray);
+
+		// Step 7
+		arrayAverage = getArrayAverage(intArray, arraySum);
+
+		// Step 8
+		getDisplayMethod(intArray, indexHighest, indexLowest, arraySum, arrayAverage);
+
+		// Step 9
+		Arrays.sort(intArray);
+
+		// Step 10
+		printArray(intArray);
+
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
 
 	// Puts Data into array
-	public static void genRanInts() {
-		for (int i = 0; i < maxArraySize; i++) {
-			intArray[i] = IR4.getRandomNumber(0, 300);
+	public static void genRanInts(int[] array, int size) {
+		for (int i = 0; i < size; i++) {
+			array[i] = IR4.getRandomNumber(0, 300);
 		}
 	}
 
@@ -45,59 +76,59 @@ public class Lab4 {
 	}
 
 	// Identifies and returns the index of the highest value in the array
-	public static void getIndexHighestMethod() {
-		for (int i = 0; i < intArray.length; i++) {
-			if (intArray[i] > arrayHighestValue) {
-				arrayHighestValue = intArray[i];
-				indexHighest = i;
+	public static int getHighestMethod(int[] array) {
+		int index = 0;
+		int arrayHighestValue = 0;
+		for (int i = 0; i < array.length; i++) {
+			
+			if (array[i] > arrayHighestValue) {
+				arrayHighestValue = array[i];
+				index = i;
 			}
 		}
+		return index;
 	}
 
 	// Identifies and returns the index of the lowest value in the array
-	public static void getIndexLowestMethod() {
-		arrayLowestValue = intArray[0];
-		for (int i = 0; i < intArray.length; i++) {
-			if (intArray[i] < arrayLowestValue) {
-				arrayLowestValue = intArray[i];
-				indexLowest = i;
+	public static int getLowestMethod(int[] array, int inputIndex) {
+		int arrayLowestValue = array[0];
+		int index = inputIndex;
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] < arrayLowestValue) {
+				arrayLowestValue = array[i];
+				index = i;
 			}
 		}
+		return index;
 	}
 
 	// Defines a method that calculates the sum of the array elements
-	public static void getArraySumMethod() {
-		for (int i = 0; i < intArray.length; i++) {
-			arraySum += intArray[i];
+	public static int getArraySumMethod(int[] array) {
+		int arraySum = 0;
+		for (int i = 0; i < array.length; i++) {
+			arraySum += array[i];
 		}
+		return arraySum;
 	}
 
 	// Calculates the average of the array elements
-	public static void getArrayAverage() {
-		arrayAverage = (double) arraySum / intArray.length;
+	public static double getArrayAverage(int[] array, int sum) {
+		return (double) sum / array.length;
 	}
 
 	// Displays the results calculated by the methods
-	private static void getDisplayMethod() {
+	private static void getDisplayMethod(int[] array, int highest, int lowest, int sum, double avg) {
 
-		System.out.println("Original Array order");
-		printArray(intArray);
 
-		getIndexHighestMethod();
-		System.out.println("The index of the highest value is " + indexHighest + " and its value is " + arrayHighestValue);
+		System.out.println("The index of the highest value is " + highest + " and its value is " + array[highest]);
 
-		getIndexLowestMethod();
-		System.out.println("The index of the lowest value is " + indexLowest + " and its value is " + arrayLowestValue);
+		System.out.println("The index of the lowest value is " + lowest + " and its value is " + array[lowest]);
 
-		getArraySumMethod();
-		System.out.println("The sum of the array elements is " + arraySum);
+		System.out.println("The sum of the array elements is " + sum);
 
-		getArrayAverage();
-		System.out.printf("The average of the array elements is " + "%.2f\n", arrayAverage);
+		System.out.printf("The average of the array elements is " + "%.2f\n", avg);
 
 		System.out.println("Sorted Array");
-		Arrays.sort(intArray);
-		printArray(intArray);
 
 	}
 }
