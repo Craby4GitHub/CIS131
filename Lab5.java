@@ -8,75 +8,100 @@
  ********************************************************************************************************************/
 
 public class Lab5 {
-	static int maxNumOfEmp = 6;
-	static int[] empNo = new int[maxNumOfEmp];
-	static double[] payRate = new double[maxNumOfEmp];
-	static double[] hoursWorked = new double[maxNumOfEmp];
-	static double[] regularPay = new double[maxNumOfEmp];
-	static double[] overtimePay = new double[maxNumOfEmp];
-	static double[] totalPay = new double[maxNumOfEmp];
-	static double overtimeRate = 1.75;
-	static int overtimeHourAmount = 40;
+	
+	
+	static final double overtimeRate = 1.75;
+	static final int overtimeHourAmount = 40;
 
 	// Variable variables! 
 	// Make sure the lower number is on the left. Im too lazy to test for that.
 	static int[] variableEmpNo = {1000, 9999};
 	static int[] variableHours = {30, 50};
 	static int[] variablePay = {7, 20};
-
+	static int maxNumOfEmp = 6;
+	
 	public static void main(String[] args) {
-		generateRandomEmpNum();
-		generateRandomPayRate();
-		generateRandomnHoursWorked();
-		calcPay();
-		printAllTheThings();
+
+		// Setup those arrays!
+		int[] empNo = new int[maxNumOfEmp];
+		double[] payRate = new double[maxNumOfEmp];
+		double[] hoursWorked = new double[maxNumOfEmp];
+		double[] regularPay = new double[maxNumOfEmp];
+		double[] overtimePay = new double[maxNumOfEmp];
+		double[] totalPay = new double[maxNumOfEmp];
+		
+		
+		// Get all that work done.
+		generateRandomEmpNum(empNo);
+		generateRandomPayRate(payRate);
+		generateRandomnHoursWorked(hoursWorked);
+		calcPay(payRate, hoursWorked, regularPay, totalPay, overtimePay);
+		printAllTheThings(empNo, payRate, hoursWorked, regularPay, totalPay, overtimePay);
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
-	public static void generateRandomPayRate() {
+	
+	// Make a random payrate, includes .00 and .50
+	public static void generateRandomPayRate(double[] inputArray) {
+		// 2 for halfs, 3 for thirds, 4 for fourths, ect...
+		int decimalAmount = 2;
 		for (int i = 0; i < maxNumOfEmp; i++) {
-			payRate[i] = Math.floor(IR4.getRandomDoubleNumber(variablePay[0], variablePay[1]) * 4) / 4;
+			inputArray[i] = Math.floor(IR4.getRandomDoubleNumber(variablePay[0], variablePay[1]) * decimalAmount) / decimalAmount;
 		}
 	}
 
-	public static void generateRandomnHoursWorked() {
+	// Make a random number of hours worked
+	public static void generateRandomnHoursWorked(double[] inputArray) {
+		// // 2 for halfs, 3 for thirds, 4 for fourths, ect...
+		int decimalAmount = 2;
 		for (int i = 0; i < maxNumOfEmp; i++) {
-			hoursWorked[i] = Math.floor(IR4.getRandomDoubleNumber(variableHours[0], variableHours[1]) * 2) / 2;
+			inputArray[i] = Math.floor(IR4.getRandomDoubleNumber(variableHours[0], variableHours[1]) * decimalAmount) / decimalAmount;
 		}
 	}
 
-	public static void generateRandomEmpNum() {
+	// Makes a random emp number
+	public static void generateRandomEmpNum(int[] inputArray) {
 		for (int i = 0; i < maxNumOfEmp; i++) {
 			int genEmpNum = IR4.getRandomNumber(variableEmpNo[0], variableEmpNo[1]);
 			// Use this to make sure the dupe check works.
 			// int genEmpNum = 0000;
 			for (int index = 0; index < maxNumOfEmp; index++) {
-				if (genEmpNum == empNo[index]) {
+				if (genEmpNum == inputArray[index]) {
 					genEmpNum = IR4.getRandomNumber(variableEmpNo[0], variableEmpNo[1]);
 					System.out.println("There was a dupe! What are the chances of that?!");
 				} else {
 				}
 			}
-			empNo[i] = genEmpNum;
+			inputArray[i] = genEmpNum;
 		}
 	}
 
-	public static void calcPay() {
+	// calculate the total pay
+	public static void calcPay(double[] payRateArray, double[] hoursWorkedArray, double[] regularPayArray, double[] totalPayArray, double[] overtimePayArray) {
 		for (int index = 0; index < maxNumOfEmp; index++) {
-			if (hoursWorked[index] <= overtimeHourAmount) {
-				regularPay[index] = hoursWorked[index] * payRate[index];
-				totalPay[index] = regularPay[index];
-			} else if (hoursWorked[index] >= overtimeHourAmount) {
-				overtimePay[index] = (hoursWorked[index] - overtimeHourAmount) * (payRate[index] * overtimeRate);
-				regularPay[index] = overtimeHourAmount * payRate[index];
-				totalPay[index] = overtimePay[index] + regularPay[index];
-			} else {
+			
+			// If they didnt work overtime...
+			if (hoursWorkedArray[index] <= overtimeHourAmount) {
+				regularPayArray[index] = hoursWorkedArray[index] * payRateArray[index];
+				totalPayArray[index] = regularPayArray[index];
+			} 
+			
+			// If they did work overtime...
+			else if (hoursWorkedArray[index] >= overtimeHourAmount) {
+				overtimePayArray[index] = (hoursWorkedArray[index] - overtimeHourAmount) * (payRateArray[index] * overtimeRate);
+				regularPayArray[index] = overtimeHourAmount * payRateArray[index];
+				totalPayArray[index] = overtimePayArray[index] + regularPayArray[index];
+			} 
+			
+			// Dont break stuff, jeez...
+			else {
 				System.out.print("You broke it. Stop that.");
 			}
 		}
 	}
 
-	public static void printAllTheThings(){
+	// Prints the stuff.
+	public static void printAllTheThings(int[] empNoArray, double[] payRateArray, double[] hoursWorkedArray, double[] regularPayArray, double[] totalPayArray, double[] overtimePayArray){
 		System.out.printf("%-15s", "Employee #");
 		System.out.printf("%-15s", "Pay Rate");
 		System.out.printf("%-14s", "Hours worked");
@@ -85,12 +110,12 @@ public class Lab5 {
 		System.out.printf("%-10s", "Total pay\n");
 	
 		for (int i = 0; i < maxNumOfEmp; i++) {
-			System.out.printf("%-15s$", empNo[i]);
-			System.out.printf("%-14.2f", payRate[i]);
-			System.out.printf("%-14.2f$", hoursWorked[i]);
-			System.out.printf("%-14.2f$", regularPay[i]);
-			System.out.printf("%-14.2f$", overtimePay[i]);
-			System.out.printf("%-14.2f\n", totalPay[i]);
+			System.out.printf("%-15s$", empNoArray[i]);
+			System.out.printf("%-14.2f", payRateArray[i]);
+			System.out.printf("%-14.2f$", hoursWorkedArray[i]);
+			System.out.printf("%-14.2f$", regularPayArray[i]);
+			System.out.printf("%-14.2f$", overtimePayArray[i]);
+			System.out.printf("%-14.2f\n", totalPayArray[i]);
 		}
 	}
 }
