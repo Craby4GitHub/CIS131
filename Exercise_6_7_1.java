@@ -14,11 +14,53 @@
  ********************************************************************************************************************/
 public class Exercise_6_7_1 {
 	public static void main(String[] args) {
-		
-		int numOfStudents = IR4.getIntegerGT("Enter number of students: ", 1, "Nope, try again");
+
+		int numOfStudents = IR4.getIntegerGTE("Enter number of students: ", 1);
 		int[] scoreArray = new int[numOfStudents];
+
+		System.out.println("Enter " + numOfStudents + " scores");
+		for (int i = 0; i < scoreArray.length; i++) {
+			scoreArray[i] = IR4.getIntegerGTE("Enter grade for student " + i, 0);
+		}
 		
-		System.out.println("Enter all the scores");
+		printGrades(scoreArray);
 	}
 
+	// -----------------------------------------------------------------------------------------------------------------
+	public static char assignLetterGrade(int grade, int highestScore) {
+
+		if (highestScore - grade <= 10)
+			return 'A';
+		else if (highestScore - grade > 10 && highestScore - grade <= 20)
+			return 'B';
+		else if (highestScore - grade > 20 && highestScore - grade <= 30)
+			return 'C';
+		else if (highestScore - grade > 30 && highestScore - grade <= 20)
+			return 'D';
+		else
+			return 'F';
+	}
+
+	public static void printGrades(int[] array) {
+		
+		int highScore = getHighestScore(array);
+
+		for (int i = 0; i < array.length; i++) {
+			
+				System.out.printf("Student " + i + " score is " +  array[i] + " and grade is " + assignLetterGrade(array[i], highScore) + "\n");
+			
+			
+		}
+	}
+
+	public static int getHighestScore(int[] array) {
+
+		int highestScore = array[0];
+
+		for (int grade: array) {
+			if (grade > highestScore)
+				highestScore = grade;
+		}
+		return highestScore;
+	}
 }
