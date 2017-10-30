@@ -7,6 +7,7 @@
  * Generates random values for everything. Nothing should break...
  ********************************************************************************************************************/
 
+
 public class Lab5 {
 	
 	
