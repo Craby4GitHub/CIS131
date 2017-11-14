@@ -1,4 +1,5 @@
 // Animal Class
+<<<<<<< HEAD
 public class Animal {
 	private boolean isAlive;
 
@@ -37,4 +38,24 @@ public class Animal {
 		
 	}
 
+=======
+public class Animal
+{
+   // showSpecies method
+   public void showSpecies()
+   {
+      System.out.println("I'm just a regular animal.");
+   }
+   
+   // makeSound method
+   public void makeSound()
+   {
+      System.out.println("Grrrrrr");
+   }
+   
+   public void showIfHouseTrained() {
+     
+   }
+   
+>>>>>>> branch 'master' of https://github.com/Craby4GitHub/CIS131.git
 }

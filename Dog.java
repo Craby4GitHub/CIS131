@@ -1,4 +1,5 @@
 // Dog Class
+<<<<<<< HEAD
 public class Dog extends Animal{
 	private boolean isHouseTrained;
   //This is a no-arg constructor
@@ -34,4 +35,24 @@ public class Dog extends Animal{
    }
    
    
+=======
+public class Dog extends Animal
+{
+  //This is a no-arg constructor
+  public Dog () {
+      
+  }
+  
+   // showSpecies method
+   public void showSpecies()
+   {
+      System.out.println("I'm a dog.");
+   }
+   
+   // makeSound method
+   public void makeSound()
+   {
+     System.out.println("Woof! Woof!");
+   }
+>>>>>>> branch 'master' of https://github.com/Craby4GitHub/CIS131.git
 }
