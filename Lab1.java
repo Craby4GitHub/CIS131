@@ -1,4 +1,4 @@
-package Finished;
+
 
 /********************************************************************************************************************
   * Lab1.java
@@ -11,8 +11,6 @@ package Finished;
   ********************************************************************************************************************/
 import java.text.DecimalFormat;
 import java.util.Scanner;
-
-import IR4;
 
 public class Lab1 {
 	private static boolean departureDay = false;

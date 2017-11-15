@@ -1,4 +1,4 @@
-package Finished;
+
 
 /********************************************************************************************************************
   * Lab2.java
@@ -13,8 +13,6 @@ package Finished;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import IR4;
 
 public class Lab2 {
 	

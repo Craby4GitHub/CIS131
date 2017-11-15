@@ -1,5 +1,4 @@
-package Finished;
-import IR4;
+
 
 /********************************************************************************************************************
  * Lab2.java Author: Will Crabtree CIS 131: Programming and Problem Solving II
